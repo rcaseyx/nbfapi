@@ -7,6 +7,7 @@ const dogSchema = mongoose.Schema({
   name: String,
   age: String,
   bio: String,
+  breed: String,
   mainImage: String,
   image2: String,
   image3: String,
