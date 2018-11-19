@@ -1,0 +1,22 @@
+{
+  "name": "nbfapi",
+  "version": "1.0.0",
+  "description": "API for NewBestFriend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rcaseyx/nbfapi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rcaseyx/nbfapi/issues"
+  },
+  "homepage": "https://github.com/rcaseyx/nbfapi#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
