@@ -1,3 +1,4 @@
+require('dotenv').load();
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -5,7 +6,6 @@ const {CLIENT_ORIGIN} = require('./config');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
-require('dotenv').config();
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -21,8 +21,8 @@ const {PORT, DATABASE_URL} = require('./config');
 const {User, Dog} = require('./models');
 
 const dogsRouter = require('./dogs');
-const usersRouter = require('./users');
-const authRouter = require('./auth');
+const { router: usersRouter } = require('./users');
+const { router: authRouter } = require('./auth');
 
 // app.use(function (req, res, next) {
 //   res.header('Access-Control-Allow-Origin', '*');
@@ -34,13 +34,10 @@ const authRouter = require('./auth');
 //   next();
 // });
 
-app.get('/api/*', (req, res) => {
-  res.json({ok: true});
-});
-
 app.use(morgan('common'));
 app.use('/dogs', dogsRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 
 let server;
 
