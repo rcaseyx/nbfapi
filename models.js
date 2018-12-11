@@ -6,11 +6,9 @@ mongoose.Promise = global.Promise;
 const dogSchema = mongoose.Schema({
   name: String,
   age: String,
-  bio: String,
-  breed: String,
+  size: String,
+  about: String,
   mainImage: String,
-  image2: String,
-  image3: String,
   url: String
 });
 

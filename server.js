@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
-require('donenv').config();
+require('dotenv').config();
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -14,8 +14,8 @@ const {PORT, DATABASE_URL} = require('./config');
 const {User, Dog} = require('./models');
 
 const dogsRouter = require('./dogs');
-const usersRouter = require('./users');
-const authRouter = require('./auth');
+// const usersRouter = require('./users');
+// const authRouter = require('./auth');
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -27,9 +27,13 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/api/*', (req, res) => {
+  res.json({ok: true});
+});
+
 app.use(morgan('common'));
-app.use('/dogs', dogsRouter);
-app.use('/users', usersRouter);
+// app.use('/dogs', dogsRouter);
+// app.use('/users', usersRouter);
 
 let server;
 
