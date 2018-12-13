@@ -128,12 +128,6 @@ router.post('/', jsonParser, (req, res) => {
 });
 
 router.put('/:id', jwtAuth, (req, res) => {
-  // if(!(req.params.id === req.body.id)) {
-  //   const message = `Request path id (${req.params.id}) and request body id ${req.body.id} must match`;
-  //   console.error(message);
-  //   return res.status(400).json({ message: message });
-  // }
-
   const toUpdate = {};
   const updateableFields = ['savedDogs', 'preferences'];
 
@@ -148,6 +142,12 @@ router.put('/:id', jwtAuth, (req, res) => {
   User.findByIdAndUpdate(req.params.id, { $set: toUpdate }, { new: true })
     .then(user => res.status(201).json(user.serialize()))
     .catch(err => res.status(500).json({ message: "Internal server error" }));
+});
+
+router.get('/:id', jwtAuth, (req,res) => {
+  User.findById(req.params.id)
+    .then(user => res.json(user.savedDogs))
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
 router.delete('/:id', jwtAuth, (req, res) => {

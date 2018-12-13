@@ -40,6 +40,16 @@ userSchema.statics.hashPassword = function(password) {
   return bcrypt.hash(password, 10);
 };
 
+userSchema.pre('find', function(next) {
+  this.populate('savedDogs');
+  next();
+});
+
+userSchema.pre('findOne', function(next) {
+  this.populate('savedDogs');
+  next();
+});
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = {User};
