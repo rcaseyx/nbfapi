@@ -128,11 +128,11 @@ router.post('/', jsonParser, (req, res) => {
 });
 
 router.put('/:id', jwtAuth, (req, res) => {
-  if(!(req.params.id === req.body.id)) {
-    const message = `Request path id (${req.params.id}) and request body id ${req.body.id} must match`;
-    console.error(message);
-    return res.status(400).json({ message: message });
-  }
+  // if(!(req.params.id === req.body.id)) {
+  //   const message = `Request path id (${req.params.id}) and request body id ${req.body.id} must match`;
+  //   console.error(message);
+  //   return res.status(400).json({ message: message });
+  // }
 
   const toUpdate = {};
   const updateableFields = ['savedDogs', 'preferences'];
@@ -142,6 +142,8 @@ router.put('/:id', jwtAuth, (req, res) => {
       toUpdate[field] = req.body[field];
     }
   });
+
+  console.log(req.body);
 
   User.findByIdAndUpdate(req.params.id, { $set: toUpdate }, { new: true })
     .then(user => res.status(201).json(user.serialize()))

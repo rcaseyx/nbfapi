@@ -15,7 +15,6 @@ const userSchema = mongoose.Schema({
     required: true
   },
   firstName: {type: String, default: ''},
-  lastName: {type: String, default: ''},
   savedDogs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Dog' }],
   preferences: {
       age: {type: String, default: 'any'},
@@ -28,9 +27,8 @@ userSchema.methods.serialize = function() {
     id: this.id,
     username: this.username || '',
     firstName: this.firstName || '',
-    lastName: this.lastName || '',
-    savedDogs: this.lists,
-    preferences: this.moviesSeen
+    savedDogs: this.savedDogs,
+    preferences: this.preferences
   };
 };
 
