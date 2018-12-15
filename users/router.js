@@ -146,7 +146,7 @@ router.put('/:id', jwtAuth, (req, res) => {
 
 router.get('/:id', jwtAuth, (req,res) => {
   User.findById(req.params.id)
-    .then(user => res.json(user.savedDogs))
+    .then(user => res.json(user.serialize()))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
